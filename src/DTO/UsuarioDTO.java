@@ -4,11 +4,10 @@
  */
 package DTO;
 
-
 public class UsuarioDTO {
-    
+
     private int id_usuario;
-    private String nome_usuario, senha_usuario; 
+    private String nome_usuario, senha_usuario, livro_usuario;
 
     public int getId_usuario() {
         return id_usuario;
@@ -33,5 +32,13 @@ public class UsuarioDTO {
     public void setSenha_usuario(String senha_usuario) {
         this.senha_usuario = senha_usuario;
     }
-    
+
+    public String getLivro_usuario() {
+        return livro_usuario;
+    }
+
+    public void setLivro_Usuario(String livro_usuario) {
+        this.livro_usuario = livro_usuario;
+    }
+
 }

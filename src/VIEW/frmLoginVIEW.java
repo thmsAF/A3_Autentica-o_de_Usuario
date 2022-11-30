@@ -44,6 +44,18 @@ public class frmLoginVIEW extends javax.swing.JFrame {
 
         jLabel2.setText("Senha");
 
+        txtNomeUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeUsuarioActionPerformed(evt);
+            }
+        });
+
+        txtSenhaUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaUsuarioActionPerformed(evt);
+            }
+        });
+
         btnEntrarSistema.setText("Entrar");
         btnEntrarSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,41 +70,42 @@ public class frmLoginVIEW extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(btnEntrarSistema))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(125, 125, 125)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNomeUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(txtSenhaUsuario)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(172, 172, 172)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jLabel2)))
                 .addContainerGap(145, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNomeUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtSenhaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(btnEntrarSistema)
-                .addGap(32, 32, 32))
+                .addGap(18, 18, 18)
+                .addComponent(btnEntrarSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarSistemaActionPerformed
-
+                
         try {
             String nome_usuario, senha_usuario;
 
@@ -102,22 +115,35 @@ public class frmLoginVIEW extends javax.swing.JFrame {
             UsuarioDTO objusuariodto = new UsuarioDTO();
             objusuariodto.setNome_usuario(nome_usuario);
             objusuariodto.setSenha_usuario(senha_usuario);
-            
+
             usuarioDAO objusuariodao = new usuarioDAO();
             ResultSet resusuariodao = objusuariodao.autenticacaoUsuario(objusuariodto);
-            
-            if (resusuariodao.next()){
-                //chamar tela que eu quero arir 
-                JOptionPane.showMessageDialog(null, "Usuario ou Senh a Invalida");
-            }else {
+
+            if (resusuariodao.next()) {
+                //chamar tela que eu quero abrir 
+                //frmPrincipal objfrmprincipal = new frmPrincipal();
+                //objfrmprincipal.setVisible(true);
+                frmNovoLivro objfrmNovoLivro = new frmNovoLivro();
+                objfrmNovoLivro.setVisible(true);
+                dispose();//fecha tela de login
+            } else {
                 //enviar mensagem dizendo incorreto
+                JOptionPane.showMessageDialog(null, "Usuario ou Senha Invalida");
             }
         } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "FRMLOGINVIEW"+erro);
+            JOptionPane.showMessageDialog(null, "FRMLOGINVIEW" + erro);
         }
 
 
     }//GEN-LAST:event_btnEntrarSistemaActionPerformed
+
+    private void txtSenhaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaUsuarioActionPerformed
+
+    private void txtNomeUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
